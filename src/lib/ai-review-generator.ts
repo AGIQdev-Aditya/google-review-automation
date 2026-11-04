@@ -19,6 +19,251 @@ export function generateReviewDraft(params: ReviewGenerationParams): string {
 
   const pickRandom = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
 
+  const isCafeOrRestaurant =
+    businessName.toLowerCase().includes("manch") ||
+    businessName.toLowerCase().includes("mitro") ||
+    businessName.toLowerCase().includes("cafe") ||
+    businessName.toLowerCase().includes("restaurant") ||
+    businessName.toLowerCase().includes("snack") ||
+    businessName.toLowerCase().includes("food") ||
+    (course && /burger|pasta|fries|chai|coffee|sandwich|pizza|maggi|shake|snack|tea|garlic/i.test(course)) ||
+    highlights.some((h) => /tasty|hygienic|chilled|portion|pocket|vibe|food|snack|delicious|kulhad|cheese/i.test(h));
+
+  // =========================================================================
+  // CAFE, FOOD OUTLET & HANGOUT SPOT NICHE (Mitro ka Manch Dadar West Mumbai)
+  // =========================================================================
+  if (isCafeOrRestaurant) {
+    if (language === "en") {
+      const openings = [
+        `Had an awesome time hanging out with friends at ${businessName} in Dadar!`,
+        `Tried the ${course || "food and snacks"} at ${businessName} and was super impressed by the taste!`,
+        `Hands down one of the coziest and most pocket-friendly hangout spots in Dadar West.`,
+        `Visited ${businessName} for a quick bite with friends and the vibe was fantastic!`,
+        `Really love the energetic, friendly vibe and delicious food at ${businessName}.`
+      ];
+
+      const highlightMap: Record<string, string[]> = {
+        "Super Tasty Food & Snacks": [
+          "The food is freshly prepared, packed with flavor, and every dish tasted amazing.",
+          "Delicious, piping-hot snacks that hit the spot perfectly every single time."
+        ],
+        "Pocket-Friendly & Great Value": [
+          "Extremely budget-friendly pricing without cutting any corners on food quality. Total value for money in Mumbai!",
+          "Super affordable menu that makes it the go-to spot for students and friends."
+        ],
+        "Cozy Hangout Vibe with Friends": [
+          "The ambiance is vibrant and relaxed—an ideal place to catch up, gossip, and chill with your gang.",
+          "Great lively atmosphere where you can sit comfortably and enjoy good conversations."
+        ],
+        "Fresh & Hygienic Preparation": [
+          "Everything is prepared in a clean kitchen with fresh ingredients and served with high hygiene standards.",
+          "Very neat and hygienic food prep, which gives complete peace of mind."
+        ],
+        "Quick Service & Polite Staff": [
+          "The staff is courteous, warm, and the order was served with impressive speed.",
+          "Quick turnaround time and prompt, polite customer service."
+        ],
+        "Refreshing Chai & Cold Coffee": [
+          "Their signature kulhad chai and thick cold coffee are pure refreshment!",
+          "The tea and beverages are freshly brewed and full of flavor."
+        ],
+        "Generous Cheese & Portions": [
+          "Portion sizes are hearty and they are super generous with cheese and toppings.",
+          "Loaded with cheese and rich toppings, making every bite satisfying."
+        ]
+      };
+
+      const conclusions = [
+        "Definitely coming back here with friends soon! 5/5 stars.",
+        "Must-visit hangout spot in Dadar for foodies and college students! Highly recommended.",
+        "Loved the taste and friendly vibe. 10/10 recommendation!",
+        "Five stars all the way for pocket-friendly, mouth-watering food!"
+      ];
+
+      const opening = pickRandom(openings);
+      const middleParts = highlights
+        .map((h) => {
+          const options = highlightMap[h];
+          return options ? pickRandom(options) : "";
+        })
+        .filter(Boolean)
+        .slice(0, 3);
+      const conclusion = pickRandom(conclusions);
+      return `${opening} ${middleParts.join(" ")} ${conclusion}`.replace(/\s+/g, " ").trim();
+    }
+
+    if (language === "hinglish") {
+      const openings = [
+        `${businessName} me dosto ke sath chill karne ka experience sach me zabardast raha!`,
+        `Dadar West me ${course || "snacks"} khane ke liye ${businessName} ekdum perfect aur pocket-friendly adda hai.`,
+        `Aaj dosto ke sath ${businessName} try kiya, taste aur vibe dono dil jeet lene wale hain!`,
+        `${businessName} ka ${course || "food"} sach me bohot delicious aur fresh tha!`
+      ];
+
+      const highlightMap: Record<string, string[]> = {
+        "Super Tasty Food & Snacks": [
+          "Taste ekdum lajawab hai, har dish ka flavor proper feel hota hai.",
+          "Food bilkul fresh aur garam garam serve hota hai, taste 10/10!"
+        ],
+        "Pocket-Friendly & Great Value": [
+          "Rates bohot pocket-friendly hain, itne kam price me itna badhiya food Mumbai me rare hai.",
+          "Pocket pe bilkul heavy nahi padta, complete paisa vasool!"
+        ],
+        "Cozy Hangout Vibe with Friends": [
+          "Dosto ke sath gappe ladane aur chill karne ke liye best mahol hai.",
+          "Vibe ekdum cozy aur energetic hai, baith ke time spend karne me maza aata hai."
+        ],
+        "Fresh & Hygienic Preparation": [
+          "Kitchen aur preparation bohot clean aur hygienic hai.",
+          "Saaf-suthre tarike se banate hain, hygiene ka pura dhyan rakha jata hai."
+        ],
+        "Quick Service & Polite Staff": [
+          "Bhaiya log bohot polite aur welcoming hain, order bhi fatfat aa gaya.",
+          "Service kaafi fast hai aur staff bohot friendly hai."
+        ],
+        "Refreshing Chai & Cold Coffee": [
+          "Yaha ki chai aur thick cold coffee mood ekdum fresh kar deti hai.",
+          "Chai lover ho toh yaha ka kulhad chai zaroor try karna!"
+        ],
+        "Generous Cheese & Portions": [
+          "Cheese aur portions bilkul bhar-bhar ke dete hain, quantity bohot sahi hai.",
+          "Loaded cheese aur heavy toppings se har bite lajawab banta hai."
+        ]
+      };
+
+      const conclusions = [
+        "Dadar aao toh ye adda bilkul miss mat karna! 5/5 stars.",
+        "Ab se dosto ke sath hangout ka permanent spot fix ho gaya. Highly recommended!",
+        "Zabardast taste aur friendly service ke liye full 5 rating!",
+        "Pocket-friendly aur super tasty! Must visit."
+      ];
+
+      const opening = pickRandom(openings);
+      const middleParts = highlights
+        .map((h) => {
+          const options = highlightMap[h];
+          return options ? pickRandom(options) : "";
+        })
+        .filter(Boolean)
+        .slice(0, 3);
+      const conclusion = pickRandom(conclusions);
+      return `${opening} ${middleParts.join(" ")} ${conclusion}`.replace(/\s+/g, " ").trim();
+    }
+
+    if (language === "mr") {
+      const openings = [
+        `मित्रांसोबत दादरच्या ${businessName} मध्ये गेलो होतो, तिथला अनुभव आणि खाणं अतिशय मस्त होतं!`,
+        `दादर पश्चिममध्ये मित्रांसोबत चिल करण्यासाठी आणि रुचकर स्नॅक्स खाण्यासाठी ${businessName} उत्तम कट्टा आहे.`,
+        `${businessName} मध्ये ${course || "खाद्यपदार्थ"} चाखले, चव आणि वातावरण दोन्ही एकदम भारी आहेत!`,
+        `दादरच्या ${businessName} मधील नाश्ता आणि चहा खरोखरच अप्रतिम आहे.`
+      ];
+
+      const highlightMap: Record<string, string[]> = {
+        "Super Tasty Food & Snacks": [
+          "पदार्थांची चव अप्रतिम आहे, गरमागरम आणि ताजं जेवण मिळतं.",
+          "प्रत्येक डिशची चव जिभेवर रेंगाळणारी आणि मन तृप्त करणारी आहे."
+        ],
+        "Pocket-Friendly & Great Value": [
+          "किमती अगदी खिशाला परवडणाऱ्या आहेत, मुंबईत इतक्या कमी दरात इतका दर्जेदार नाश्ता मिळणं कौतुकास्पद आहे.",
+          "कमी खर्चात उत्कृष्ट दर्जाचं खाणं, पूर्ण पैसा वसूल!"
+        ],
+        "Cozy Hangout Vibe with Friends": [
+          "मित्रांच्या गप्पांसाठी आणि निवांत वेळ घालवण्यासाठी एकदम छान आणि सकारात्मक वातावरण.",
+          "कॉलेज आणि ऑफिसनंतर मित्रांसोबत भेटण्यासाठी दादरमधील सर्वोत्तम ठिकाण."
+        ],
+        "Fresh & Hygienic Preparation": [
+          "स्वच्छता आणि हायजीनची पूर्ण काळजी घेतली जाते.",
+          "अतिशय स्वच्छ वातावरणात आणि ताज्या साहित्यापासून खाद्यपदार्थ तयार केले जातात."
+        ],
+        "Quick Service & Polite Staff": [
+          "कर्मचारी अतिशय मनमिळाऊ आणि तत्पर आहेत, ऑर्डर वेळेत मिळते.",
+          "सर्व्हिस खूप जलद आहे आणि सर्वजण खूप आदराने वागतात."
+        ],
+        "Refreshing Chai & Cold Coffee": [
+          "इथली कुल्हड चहा आणि घट्ट कोल्ड कॉफी थकवा पळवणारी आणि ताजीतवानी करणारी आहे.",
+          "खास चहा प्रेमींसाठी इथली चहा म्हणजे पर्वणीच!"
+        ],
+        "Generous Cheese & Portions": [
+          "चीज आणि प्रमाणाचा हात आखडता न घेता भरपूर सर्व्ह करतात.",
+          "भरपूर चीज आणि उत्तम क्वांटिटीमुळे पोट आणि मन दोन्ही भरतं."
+        ]
+      };
+
+      const conclusions = [
+        "दादर परिसरातील खवय्यांसाठी आणि मित्रांच्या ग्रुपसाठी नक्कीच भेट देण्यासारखं ठिकाण! ५/५ स्टार्स.",
+        "उत्कृष्ट चव आणि आपुलकीची सेवा! मनापासून शिफारस करतो.",
+        "पुन्हा नक्की भेट देणार! खूप खूप धन्यवाद."
+      ];
+
+      const opening = pickRandom(openings);
+      const middleParts = highlights
+        .map((h) => {
+          const options = highlightMap[h];
+          return options ? pickRandom(options) : "";
+        })
+        .filter(Boolean)
+        .slice(0, 3);
+      const conclusion = pickRandom(conclusions);
+      return `${opening} ${middleParts.join(" ")} ${conclusion}`.replace(/\s+/g, " ").trim();
+    }
+
+    if (language === "hi") {
+      const openings = [
+        `दादर (मुंबई) में मित्रों के साथ ${businessName} जाने का अनुभव बहुत ही शानदार और मजेदार रहा!`,
+        `${businessName} में ${course || "स्नैक्स"} का स्वाद वाकई बहुत ही लाजवाब और ताज़ा है।`,
+        `दादर वेस्ट में दोस्तों के साथ बैठने और स्वादिष्ट नाश्ता करने के लिए ${businessName} एक बेहतरीन जगह है।`
+      ];
+
+      const highlightMap: Record<string, string[]> = {
+        "Super Tasty Food & Snacks": [
+          "खाना बेहद स्वादिष्ट, गरमागरम और ताज़ा तैयार किया जाता है।",
+          "हर डिश का स्वाद बहुत ही उम्दा है।"
+        ],
+        "Pocket-Friendly & Great Value": [
+          "कीमतें बहुत ही किफायती और वाजिब हैं, मुंबई में इतने कम दाम में इतना बढ़िया खाना मिलना मुश्किल है।",
+          "पॉकेट पर बिल्कुल भारी नहीं पड़ता, पूरा पैसा वसूल!"
+        ],
+        "Cozy Hangout Vibe with Friends": [
+          "दोस्तों के साथ फुर्सत के पल बिताने और गपशप करने के लिए बहुत ही आरामदायक माहौल है।",
+          "यहाँ का माहौल बहुत ही पॉजिटिव और जीवंत है।"
+        ],
+        "Fresh & Hygienic Preparation": [
+          "साफ-सफाई और हाइजीन का पूरा ध्यान रखा जाता है।",
+          "किचन बहुत साफ-सुथरी है और ताज़ी सामग्री इस्तेमाल होती है।"
+        ],
+        "Quick Service & Polite Staff": [
+          "यहाँ का स्टाफ बहुत ही विनम्र, सहयोगी और फुर्तीला है।",
+          "ऑर्डर बहुत जल्दी और अच्छे से सर्व किया गया।"
+        ],
+        "Refreshing Chai & Cold Coffee": [
+          "यहाँ की कुल्हड़ चाय और कोल्ड कॉफी मूड को एकदम तरोताज़ा कर देती है।",
+          "चाय प्रेमियों के लिए यह जगह जरूर ट्राय करने लायक है।"
+        ],
+        "Generous Cheese & Portions": [
+          "चीज और पोर्शन साइज बहुत ही अच्छा दिया जाता है।",
+          "क्वांटिटी बहुत बढ़िया है और भरपूर संतुष्टि मिलती है।"
+        ]
+      };
+
+      const conclusions = [
+        "दादर में रहने वाले सभी दोस्तों और फूड लवर्स को यहाँ जरूर आना चाहिए! 5/5 स्टार्स।",
+        "शानदार स्वाद और बेहतरीन सर्विस के लिए बहुत-बहुत धन्यवाद!",
+        "बेहद अनुशंसित! 10/10 रेटिंग।"
+      ];
+
+      const opening = pickRandom(openings);
+      const middleParts = highlights
+        .map((h) => {
+          const options = highlightMap[h];
+          return options ? pickRandom(options) : "";
+        })
+        .filter(Boolean)
+        .slice(0, 3);
+      const conclusion = pickRandom(conclusions);
+      return `${opening} ${middleParts.join(" ")} ${conclusion}`.replace(/\s+/g, " ").trim();
+    }
+  }
+
   const isMusicStudio =
     businessName.toLowerCase().includes("naad") ||
     businessName.toLowerCase().includes("jam") ||

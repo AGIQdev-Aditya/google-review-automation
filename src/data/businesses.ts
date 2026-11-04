@@ -203,6 +203,46 @@ export const BUSINESSES_REGISTRY: Record<string, PublicBusinessData> = {
       "Affordable Hourly Jamming Rates",
       "Clean & Fully Air-Conditioned"
     ]
+  },
+  "mitro-ka-manch": {
+    "id": "mitro-ka-manch-id",
+    "name": "Mitro ka Manch",
+    "slug": "mitro-ka-manch",
+    "tagline": "Dadar West, Mumbai • Pocket-Friendly Hangout & Cafe",
+    "category": "Cafe & Fast Food Restaurant",
+    "welcomeMessage": "Munch with friends, chill with chai! Share your food & hangout experience on Google.",
+    "logoPath": "/assets/mitro-logo.png",
+    "primaryColor": "#C04516",
+    "accentColor": "#FFF6EE",
+    "googleReviewUrl": "https://www.google.com/maps/place/Mitro+ka+Manch/@19.0207651,72.8349201,17z/data=!4m8!3m7!1s0x3be7cf148f949dbb:0x8c4155ea5c492c6e!8m2!3d19.0207651!4d72.8349201!9m1!1b1!16s%2Fg%2F11ltqmb5vd?entry=ttu",
+    "googleMapsUrl": "https://maps.google.com/?cid=10106517524021292142",
+    "instagram1": "https://www.instagram.com/mitro_ka_manch/",
+    "instagram1Label": "@mitro_ka_manch",
+    "phone": "+91 80973 10159",
+    "whatsapp": "918097310159",
+    "address": "Ground Floor, Swatantryaveer Savarkar Road, near MTNL Building, Dadar West, Mumbai, Maharashtra 400028",
+    "rating": 4.9,
+    "reviewCount": 195,
+    "courseOptions": [
+      "Special Kulhad Chai",
+      "Paneer Tandoori Burger",
+      "White Sauce Pasta",
+      "Peri Peri Cheese Fries",
+      "Cold Coffee & Thick Shakes",
+      "Cheese Garlic Bread",
+      "Club Grilled Sandwich",
+      "Loaded Veg Pizza",
+      "Maggi & Quick Bites"
+    ],
+    "highlightOptions": [
+      "Super Tasty Food & Snacks",
+      "Pocket-Friendly & Great Value",
+      "Cozy Hangout Vibe with Friends",
+      "Fresh & Hygienic Preparation",
+      "Quick Service & Polite Staff",
+      "Refreshing Chai & Cold Coffee",
+      "Generous Cheese & Portions"
+    ]
   }
 };
 
@@ -213,6 +253,9 @@ export function getRegisteredBusiness(slug: string): PublicBusinessData {
   }
   if (normalized === "naad" || normalized === "naad-jamroom" || normalized === "naadjamroom") {
     return BUSINESSES_REGISTRY["naadjamroom"] || BUSINESSES_REGISTRY["naad-jamroom"];
+  }
+  if (normalized === "mitro" || normalized === "mitrokamanch" || normalized === "mitro-manch") {
+    return BUSINESSES_REGISTRY["mitro-ka-manch"];
   }
   // Default fallback is phoenix-tech
   return BUSINESSES_REGISTRY["phoenix-tech"] || Object.values(BUSINESSES_REGISTRY)[0];

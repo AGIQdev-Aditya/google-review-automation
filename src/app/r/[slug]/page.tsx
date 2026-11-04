@@ -35,22 +35,25 @@ function GenericBusinessReviewPage({ slug }: { slug: string }) {
   const [loading, setLoading] = React.useState(false);
 
   // AI Review Assistant States
-  const [selectedCourse, setSelectedCourse] = React.useState<string>(() =>
-    getRegisteredBusiness(slug).courseOptions?.[0] || "MS-CIT Certification"
-  );
-  const [selectedHighlights, setSelectedHighlights] = React.useState<string[]>([
-    "Expert Faculty & Mentorship",
-    "Modern Hands-on Lab"
-  ]);
+  const [selectedCourse, setSelectedCourse] = React.useState<string>(() => {
+    const biz = getRegisteredBusiness(slug);
+    return biz.courseOptions?.[0] || "General Service";
+  });
+  const [selectedHighlights, setSelectedHighlights] = React.useState<string[]>(() => {
+    const biz = getRegisteredBusiness(slug);
+    return biz.highlightOptions?.slice(0, 2) || ["Superb Quality", "Great Customer Support"];
+  });
   const [language, setLanguage] = React.useState<ReviewLanguage>("en");
   
   // Pre-generate draft on first render so user never sees an empty box or delay
   const [generatedDraft, setGeneratedDraft] = React.useState<string>(() => {
     const biz = getRegisteredBusiness(slug);
+    const initialCourse = biz.courseOptions?.[0] || "General Service";
+    const initialHighlights = biz.highlightOptions?.slice(0, 2) || ["Superb Quality", "Great Customer Support"];
     return generateReviewDraft({
       businessName: biz.name,
-      course: biz.courseOptions?.[0] || "MS-CIT Certification",
-      highlights: ["Expert Faculty & Mentorship", "Modern Hands-on Lab"],
+      course: initialCourse,
+      highlights: initialHighlights,
       language: "en"
     });
   });
@@ -371,7 +374,9 @@ END:VCARD`;
                   ? "1. Select Tattoo Style / Service"
                   : business.category?.toLowerCase().includes("dental") || business.category?.toLowerCase().includes("clinic")
                   ? "1. Select Treatment / Service"
-                  : "1. Select Course / Program"}
+                  : business.category?.toLowerCase().includes("cafe") || business.category?.toLowerCase().includes("restaurant") || business.category?.toLowerCase().includes("food")
+                  ? "1. Select What You Ordered / Enjoyed"
+                  : "1. Select Service / Program"}
               </label>
               <div className="flex flex-wrap gap-1.5">
                 {business.courseOptions.map((course) => {
