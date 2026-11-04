@@ -3,7 +3,7 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 
 async function generatePersonalizedQr() {
-  const targetUrl = 'https://lime-cookies-ethical-operate.trycloudflare.com/r/mitro-ka-manch';
+  const targetUrl = 'https://google-review-automation-nu.vercel.app/r/mitro-ka-manch';
   console.log('Generating QR code for:', targetUrl);
 
   // 1. Generate SVG data

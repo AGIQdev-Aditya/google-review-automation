@@ -2,7 +2,7 @@ const QRCode = require('qrcode');
 const fs = require('fs');
 
 async function genSquare() {
-  const targetUrl = 'https://lime-cookies-ethical-operate.trycloudflare.com/r/mitro-ka-manch';
+  const targetUrl = 'https://google-review-automation-nu.vercel.app/r/mitro-ka-manch';
   const qrSvg = await QRCode.toString(targetUrl, {
     type: 'svg',
     errorCorrectionLevel: 'H',
