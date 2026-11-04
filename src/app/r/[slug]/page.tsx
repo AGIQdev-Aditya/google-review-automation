@@ -26,6 +26,7 @@ import {
 import { BhikshuReviewInterface } from "@/components/bhikshu/BhikshuReviewInterface";
 import { NaadReviewInterface } from "@/components/naad/NaadReviewInterface";
 import { PhoenixReviewInterface } from "@/components/phoenix/PhoenixReviewInterface";
+import { MitroReviewInterface } from "@/components/mitro/MitroReviewInterface";
 
 function GenericBusinessReviewPage({ slug }: { slug: string }) {
   // Instant synchronous profile loading - 0ms delay, no layout shift or lag
@@ -658,6 +659,16 @@ export default function PublicBusinessPage({
   // Dedicated custom interface for Bhikshu Tattoo Studio
   if (slug === "bhikshu-tattoo") {
     return <BhikshuReviewInterface business={getRegisteredBusiness("bhikshu-tattoo")} />;
+  }
+
+  // Dedicated custom interface for Mitro ka Manch (Dadar West, Mumbai)
+  if (
+    slug === "mitro-ka-manch" ||
+    slug === "mitro" ||
+    slug === "mitrokamanch" ||
+    slug === "mitro-manch"
+  ) {
+    return <MitroReviewInterface business={getRegisteredBusiness("mitro-ka-manch")} />;
   }
 
   return <GenericBusinessReviewPage slug={slug} />;
