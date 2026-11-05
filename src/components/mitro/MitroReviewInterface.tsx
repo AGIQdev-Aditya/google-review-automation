@@ -220,7 +220,7 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
 
     const targetUrl =
       business.googleReviewUrl ||
-      "https://search.google.com/local/writereview?placeid=ChIJu52UjxTP5ztuLElc6lVBjA";
+      "https://www.google.com/maps/place/Mitro+ka+Manch/@19.0207651,72.8349201,17z/data=!4m8!3m7!1s0x3be7cf148f949dbb:0x8c4155ea5c492c6e!8m2!3d19.0207651!4d72.8349201!9m1!1b1!16s%2Fg%2F11ltqmb5vd?entry=ttu";
 
     setTimeout(() => {
       setCopied(false);
@@ -292,7 +292,10 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
 
           {/* Address Line directly below company name: SOLID BLACK (#000000) */}
           <a
-            href={business.googleMapsUrl || "https://maps.app.goo.gl/o652sTjmX8qGUEdr6"}
+            href={
+              business.googleMapsUrl ||
+              "https://www.google.com/maps/place/Mitro+ka+Manch/@19.0207651,72.8349201,17z/data=!4m6!3m5!1s0x3be7cf148f949dbb:0x8c4155ea5c492c6e!8m2!3d19.0207651!4d72.8349201!16s%2Fg%2F11ltqmb5vd"
+            }
             target="_blank"
             rel="noopener noreferrer"
             title="Open directions in Google Maps"
@@ -469,7 +472,10 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
 
           {/* Google Maps / Directions */}
           <a
-            href={business.googleMapsUrl || "https://maps.app.goo.gl/o652sTjmX8qGUEdr6"}
+            href={
+              business.googleMapsUrl ||
+              "https://www.google.com/maps/place/Mitro+ka+Manch/@19.0207651,72.8349201,17z/data=!4m6!3m5!1s0x3be7cf148f949dbb:0x8c4155ea5c492c6e!8m2!3d19.0207651!4d72.8349201!16s%2Fg%2F11ltqmb5vd"
+            }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Find Mitro ka Manch on Google Maps"
