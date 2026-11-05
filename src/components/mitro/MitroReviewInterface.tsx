@@ -220,7 +220,7 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
 
     const targetUrl =
       business.googleReviewUrl ||
-      "https://maps.google.com/?cid=10106517524021292142";
+      "https://search.google.com/local/writereview?placeid=ChIJu52UjxTP5ztuLElc6lVBjA";
 
     setTimeout(() => {
       setCopied(false);
@@ -291,9 +291,15 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
           </h1>
 
           {/* Address Line directly below company name: SOLID BLACK (#000000) */}
-          <p className="font-sora text-xs font-semibold text-[#000000] tracking-wide">
+          <a
+            href={business.googleMapsUrl || "https://maps.app.goo.gl/o652sTjmX8qGUEdr6"}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open directions in Google Maps"
+            className="font-sora text-xs font-semibold text-[#000000] tracking-wide hover:text-[#C04516] transition-colors cursor-pointer"
+          >
             Dadar West, Mumbai, Maharashtra 400028
-          </p>
+          </a>
 
           {/* Star Ratings: Center stage of header layout */}
           <div className="flex items-center justify-center pt-2 pb-1">
@@ -463,12 +469,12 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
 
           {/* Google Maps / Directions */}
           <a
-            href={business.googleMapsUrl || "https://maps.google.com/?cid=10106517524021292142"}
+            href={business.googleMapsUrl || "https://maps.app.goo.gl/o652sTjmX8qGUEdr6"}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Find Mitro ka Manch on Google Maps"
             title="Directions on Google Maps"
-            className="w-11 h-11 rounded-full bg-white border border-slate-300 text-[#C04516] hover:text-[#A3360E] hover:border-[#C04516] flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:scale-95 group shadow-sm"
+            className="w-11 h-11 rounded-full bg-white border border-slate-300 text-[#C04516] hover:text-[#A3360E] hover:border-[#C04516] flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:scale-95 group shadow-sm cursor-pointer"
           >
             <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform" />
           </a>
