@@ -62,11 +62,11 @@ function WhatsAppIcon({ className = "w-4 h-4 shrink-0" }: { className?: string }
 }
 
 export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
-  // 4 Key feedback points state
-  const [selectedHighlights, setSelectedHighlights] = React.useState<string[]>([
-    "Super Tasty Food & Snacks",
-    "Pocket-Friendly & Great Value"
-  ]);
+  // 4 Key feedback points state (randomize initial pair so zero-click users get distinct reviews)
+  const [selectedHighlights, setSelectedHighlights] = React.useState<string[]>(() => {
+    const shuffled = [...KEY_FEEDBACK_POINTS].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 2);
+  });
 
   // Review language state
   const [language, setLanguage] = React.useState<ReviewLanguage>("en");
@@ -128,9 +128,19 @@ export function MitroReviewInterface({ business }: MitroReviewInterfaceProps) {
       const activeHighlights = nextHighlights || selectedHighlights;
       const activeLang = nextLang || language;
 
+      const dishes = [
+        "Special Kulhad Chai",
+        "Paneer Tandoori Burger",
+        "Peri Peri Cheese Fries",
+        "Cold Coffee & Thick Shakes",
+        "Club Grilled Sandwich",
+        "Food & Snacks"
+      ];
+      const randomDish = dishes[Math.floor(Math.random() * dishes.length)];
+
       const draft = generateReviewDraft({
         businessName: business.name,
-        course: "Special Kulhad Chai & Snacks",
+        course: randomDish,
         highlights: activeHighlights.length > 0 ? activeHighlights : ["Super Tasty Food & Snacks"],
         language: activeLang
       });
